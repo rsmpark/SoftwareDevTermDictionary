@@ -1,0 +1,48 @@
+<form class="form-inline">
+  <div class="form-group">
+    <label class="sr-only">Email</label>
+    <h3 class="form-control-static no-margin">List of English Terms</h3>
+  </div>
+
+  <div id="search-term"
+       class="form-group">
+    <label for="searchTerm"
+           class="sr-only">Search</label>
+    <input class="form-control"
+           id="search-term"
+           name="search-term"
+           type="search"
+           placeholder="Search..."
+           [(ngModel)]="searchWord"
+           (ngModelChange)="onSearchWord()">
+  </div>
+  <a routerLink="/terms/create"
+     class="btn btn-primary">New</a>&nbsp;
+  <div class="form-group">
+
+  </div>
+</form>
+<table class="table table-striped">
+  <thead>
+    <tr class="d-flex">
+      <th class="col-xs-1">Word</th>
+      <th class="col-xs-1">Author</th>
+      <th class="col-xs-8">Definition</th>
+      <th class="col-xs-3">Field of Study</th>
+      <th class="col-xs-5"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="d-flex"
+        *ngFor='let term of terms'>
+      <td class="col-xs-1">{{ term.wordEnglish }}</td>
+      <td class="col-xs-1">{{ term.authorName}}</td>
+      <td class="col-xs-8">{{ term.definitions[0].definition }}</td>
+      <td class="col-xs-3">{{term.fieldOfStudy}}</td>
+      <td class="col-xs-5">
+        <a routerLink="/users/detail/{{ term.wordEnglish }}"
+           class="btn btn-default">Detail</a>&nbsp;
+      </td>
+    </tr>
+  </tbody>
+</table>
