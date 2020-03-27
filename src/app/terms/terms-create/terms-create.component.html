@@ -1,0 +1,87 @@
+<div class="container-fluid customer-container">
+  <h3>Create a new term</h3>
+  <p>Enter data, and click/tap the Save button</p>
+  <form (ngSubmit)='onTermSave()'
+        #f='ngForm'>
+
+    <div class="form-group">
+      <label class="control-label"
+             for="author">Author Name:</label>
+      <input class="form-control"
+             id="author"
+             name="author"
+             [(ngModel)]="newTerm.authorName"
+             required
+             autofocus>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label"
+             for="term">Term</label>
+      <input class="form-control"
+             id="term"
+             name="term"
+             [(ngModel)]="newTerm.wordEnglish"
+             #term="ngModel"
+             required>
+    </div>
+
+    <!-- Validation error area -->
+    <div *ngIf='term.invalid && (term.dirty || term.touched)'
+         class='alert alert-danger'>
+      <!-- The code below is situation-dependent - think before coding -->
+      <div *ngIf='term.errors?.required'>Name is required, 3 to 100 characters</div>
+
+    </div>
+
+    <div class="form-group">
+      <label class="control-label"
+             for="expanded">Expansion</label>
+      <input class="form-control"
+             id="expanded"
+             name="expanded"
+             [(ngModel)]="newTerm.wordExpanded">
+    </div>
+
+    <div class="form-group">
+      <label class="control-label"
+             for="definition">Definition</label>
+      <textarea class="form-control"
+                id="definition"
+                name="definition"
+                [(ngModel)]="newTerm.definition"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label"
+             for="link-authoritative">Authoritative Link</label>
+      <input class="form-control"
+             id="link-authoritative"
+             name="link-authoritative"
+             [(ngModel)]="newTerm.linkAuthoritative">
+    </div>
+
+    <div class="form-group">
+      <label class="control-label"
+             for="link-wiki">Wiki Link</label>
+      <input class="form-control"
+             id="link-wiki"
+             name="link-wiki"
+             [(ngModel)]="newTerm.linkWikipedia">
+    </div>
+    <div class="form-group">
+      <label class="control-label"
+             for="link-youtube">YouTube Link</label>
+      <input class="form-control"
+             id="link-youtube"
+             name="link-youtube"
+             [(ngModel)]="newTerm.linkYoutube">
+    </div>
+
+    <button class="btn btn-primary"
+            type="submit">Save</button>&nbsp;
+    <a routerLink="/users"
+       class="btn btn-default">Back to list</a>
+
+  </form>
+</div>
