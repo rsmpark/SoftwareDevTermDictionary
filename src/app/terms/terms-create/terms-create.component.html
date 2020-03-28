@@ -4,6 +4,13 @@
   <form (ngSubmit)='onTermSave()'
         #f='ngForm'>
 
+
+    <!-- TODO: Remove later -->
+    <div *ngIf="f.submitted">Valid: {{f.valid}}</div>
+
+    <!-- ------------------------------------------------------------ -->
+    <!-- -----------------Author Name Input------------------ -->
+    <!-- ------------------------------------------------------------ -->
     <div class="form-group">
       <label class="control-label"
              for="author">Author Name:</label>
@@ -11,10 +18,22 @@
              id="author"
              name="author"
              [(ngModel)]="newTerm.authorName"
+             #authorName="ngModel"
              required
              autofocus>
+
     </div>
 
+    <!-- Validation error area -->
+    <!-- If field is empty after submission -->
+    <div *ngIf="f.submitted && authorName.invalid"
+         class='alert alert-danger'>
+      <div *ngIf="authorName.errors.required">Name required</div>
+    </div>
+
+    <!-- ------------------------------------------------------------ -->
+    <!-- -----------------Term Input------------------ -->
+    <!-- ------------------------------------------------------------ -->
     <div class="form-group">
       <label class="control-label"
              for="term">Term</label>
@@ -29,13 +48,21 @@
     </div>
 
     <!-- Validation error area -->
+    <!-- If existing term is found -->
     <div *ngIf='term.errors?.existingTermFound '
          class='alert alert-danger'>
       <!-- The code below is situation-dependent - think before coding -->
       <div *ngIf='term.errors.existingTermFound'>Term already exists!</div>
-
+    </div>
+    <!-- If field is empty after submission -->
+    <div *ngIf="f.submitted && term.invalid"
+         class='alert alert-danger'>
+      <div *ngIf="term.errors.required">Term required</div>
     </div>
 
+    <!-- ------------------------------------------------------------ -->
+    <!-- -----------------Expansion Input------------------ -->
+    <!-- ------------------------------------------------------------ -->
     <div class="form-group">
       <label class="control-label"
              for="expanded">Expansion</label>
@@ -45,6 +72,9 @@
              [(ngModel)]="newTerm.wordExpanded">
     </div>
 
+    <!-- ------------------------------------------------------------ -->
+    <!-- -----------------Definition Input------------------ -->
+    <!-- ------------------------------------------------------------ -->
     <div class="form-group">
       <label class="control-label"
              for="definition">Definition</label>
@@ -52,9 +82,22 @@
                 id="definition"
                 name="definition"
                 [(ngModel)]="newTerm.definition"
+                #definition="ngModel"
                 required></textarea>
     </div>
 
+    <!-- Validation error area -->
+    <!-- If field is empty after submission -->
+    <div *ngIf="f.submitted && definition.invalid"
+         class='alert alert-danger'>
+      <div *ngIf="definition.errors.required">Definition required</div>
+    </div>
+
+
+
+    <!-- ------------------------------------------------------------ -->
+    <!-- -----------------Authoritative Link Input------------------ -->
+    <!-- ------------------------------------------------------------ -->
     <div class="form-group">
       <label class="control-label"
              for="link-authoritative">Authoritative Link</label>
@@ -64,6 +107,9 @@
              [(ngModel)]="newTerm.linkAuthoritative">
     </div>
 
+    <!-- ------------------------------------------------------------ -->
+    <!-- -----------------Wiki Link Input------------------ -->
+    <!-- ------------------------------------------------------------ -->
     <div class="form-group">
       <label class="control-label"
              for="link-wiki">Wiki Link</label>
@@ -72,6 +118,10 @@
              name="link-wiki"
              [(ngModel)]="newTerm.linkWikipedia">
     </div>
+
+    <!-- ------------------------------------------------------------ -->
+    <!-- -----------------Youtube Link Input------------------ -->
+    <!-- ------------------------------------------------------------ -->
     <div class="form-group">
       <label class="control-label"
              for="link-youtube">YouTube Link</label>
@@ -81,6 +131,9 @@
              [(ngModel)]="newTerm.linkYoutube">
     </div>
 
+    <!-- ------------------------------------------------------------ -->
+    <!-- -----------------Submit Button------------------ -->
+    <!-- ------------------------------------------------------------ -->
     <button class="btn btn-primary"
             type="submit">Save</button>&nbsp;
     <a routerLink="/users"
