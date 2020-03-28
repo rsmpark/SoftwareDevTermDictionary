@@ -22,6 +22,7 @@ export class TermsListComponent implements OnInit {
   }
 
   onSearchWord() {
+    //TODO: Do we have to encode the word before sending the Web API
     this.dataManager
       .getAllEnglishTermsByWord(this.searchWord)
       .subscribe((termsMatched: EnglishTerm[]) => {
