@@ -45,6 +45,9 @@ export class DataManagerService {
   getAllEnglishTermsByWord(word: string): Observable<EnglishTerm[]> {
     return this.http.get<EnglishTerm[]>(`${this.url}/api/terms/english?word=${word}`);
   }
+  getEnglishTermByWordExactMatch(word: string): Observable<EnglishTerm> {
+    return this.http.get<EnglishTerm>(`${this.url}/api/terms/english?word=${word}&exact=true`);
+  }
 
   addEnglishTerm(newTerm: EnglishTerm): Observable<EnglishTerm> {
     return this.http.post<EnglishTerm>(this.url, newTerm, this.httpOptions).pipe(

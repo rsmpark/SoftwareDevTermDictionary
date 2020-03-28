@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { TermsListComponent } from './terms/terms-list/terms-list.component';
 import { TermDetailComponent } from './terms/term-detail/term-detail.component';
 import { TermsCreateComponent } from './terms/terms-create/terms-create.component';
+import { ExistingTermValidator } from './terms/terms-create/existing-term-validator.directive';
 
 @NgModule({
   declarations: [
@@ -19,9 +20,11 @@ import { TermsCreateComponent } from './terms/terms-create/terms-create.componen
     HomeComponent,
     TermsListComponent,
     TermDetailComponent,
-    TermsCreateComponent
+    TermsCreateComponent,
+    ExistingTermValidator
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
+
   providers: [],
   bootstrap: [AppComponent]
 })
