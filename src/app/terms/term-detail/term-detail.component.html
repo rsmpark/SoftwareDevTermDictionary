@@ -1,1 +1,71 @@
-<p>term-detail works!</p>
+<div *ngIf="term; else notFound">
+  <h3>English Term detail - {{ term.wordEnglish }}</h3>
+  <p>&nbsp;</p>
+  <div class="row">
+    <div class="col-md-9">
+      <dl class="dl-horizontal">
+        <dt>Definitions
+          <br>({{term.definitions.length}})
+          <br><button class="btn btn-default"
+                  type="submit">Add Definition</button>
+        </dt>
+        <dd>
+          <div *ngFor="let definition of term.definitions; let i=index"
+               class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title"><button class="btn btn-default"
+                        type="submit">Like <span
+                        class="badge badge-secondary">{{term.definitions[i].likes}}</span></button> Author:
+                {{definition.authorName}} on {{definition.dateCreated}}</h3>
+            </div>
+            <div class="panel-body">
+              {{definition.definition}}
+            </div>
+          </div>
+        </dd>
+        <dt>Field of Study</dt>
+        <dd>{{ term.fieldOfStudy }}</dd>
+        <dt>Author Name</dt>
+        <dd>{{ term.authorName }}</dd>
+        <dt>Dates</dt>
+        <dd>Created: {{ term.dateCreated }}</dd>
+        <dd>Revised: {{ term.dateRevised }}</dd>
+        <dt>Links Name</dt>
+        <dd>
+          <a *ngIf="term.linkAuthoritative"
+             class="btn btn-default"
+             href="{{term.linkAuthoritative}}"
+             target="_blank">Authoritative</a>
+          <a *ngIf="term.linkWikipedia"
+             class="btn btn-default"
+             href="{{term.linkWikipedia}}"
+             target="_blank">Wikipedia</a>
+          <a *ngIf="term.linkYouTube"
+             class="btn btn-default"
+             href="{{term.linkYouTube}}"
+             target="_blank">YouTube</a>
+        </dd>
+        <dt>Wat this helpful?</dt>
+        <dd>
+          <button class="btn btn-default"
+                  type="submit">Yes <span class="badge badge-secondary">{{term.helpYes}}</span></button>
+          <button class="btn btn-default"
+                  type="submit">No <span class="badge badge-secondary"> {{term.helpNo}} </span> </button>
+
+        </dd>
+      </dl>
+    </div>
+
+  </div>
+  <div>
+    <hr>
+    <a routerLink="/terms"
+       class="btn btn-default">Back to list</a>
+  </div>
+</div>
+
+<ng-template #notFound>
+  <p>Requested user was not found</p>
+  <p><a routerLink="/terms"
+       class="btn btn-default">Back to list</a></p>
+</ng-template>
