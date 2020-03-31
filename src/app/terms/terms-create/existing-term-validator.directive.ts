@@ -7,7 +7,7 @@ import {
   NG_ASYNC_VALIDATORS
 } from '@angular/forms';
 import { DataManagerService } from '../../shared/data-manager.service';
-import { EnglishTerm } from '../../shared/model/term.model';
+import { EnglishTermApi } from '../../shared/model/term.model';
 import { Observable } from 'rxjs';
 
 @Directive({
@@ -26,12 +26,11 @@ export class ExistingTermValidator implements AsyncValidator {
   }
 
   onSearchWord(termTarget) {
-    //TODO: Do we have to encode the word before sending the Web API
+    // TODO: Do we have to encode the word before sending the Web API
     return new Promise((resolve, reject) => {
       this.dataManager
         .getEnglishTermByWordExactMatch(termTarget)
-        .subscribe((termsMatched: EnglishTerm) => {
-          console.log(termsMatched);
+        .subscribe((termsMatched: EnglishTermApi) => {
           if (Array.isArray(termsMatched) && termsMatched.length) {
             resolve({ existingTermFound: true });
           } else {
