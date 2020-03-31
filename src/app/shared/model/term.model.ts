@@ -1,4 +1,5 @@
-export class EnglishTerm {
+export class EnglishTermApi {
+  _id: string;
   wordEnglish: string;
   wordNonEnglish?: string;
   wordExpanded?: string;
@@ -11,13 +12,57 @@ export class EnglishTerm {
   linkWikipedia?: string;
   linkYouTube?: string;
   authorName: string;
+  dateCreated: Date;
+  dateRevised: Date;
   fieldOfStudy?: string;
   helpYes?: number;
   helpNo?: number;
   definitions?: [Definition];
 }
 
-export class NonEnglishTerm {
+export class NonEnglishTermApi {
+  _id: string;
+  wordEnglish: string;
+  wordNonEnglish?: string;
+  wordExpanded?: string;
+  languageCode: string;
+  image?: string;
+  imageType?: string;
+  audio: string;
+  audioType?: string;
+  linkAuthoritative?: string;
+  linkWikipedia?: string;
+  linkYouTube?: string;
+  authorName: string;
+  dateCreated: Date;
+  dateRevised: Date;
+  fieldOfStudy?: string;
+  helpYes?: number;
+  helpNo?: number;
+  definitions: [Definition];
+  termEnglishId: string;
+}
+
+export class EnglishTermRequest {
+  wordEnglish: string = '';
+  wordNonEnglish: string;
+  wordExpanded: string;
+  languageCode = 'en';
+  image: string;
+  imageType: string;
+  audio: string;
+  audioType: string;
+  linkAuthoritative: string;
+  linkWikipedia: string;
+  linkYouTube: string;
+  authorName: string;
+  fieldOfStudy: string;
+  helpYes: number;
+  helpNo: number;
+  definitions: [DefinitionRequest];
+}
+
+export class NonEnglishTermRequest {
   wordEnglish: string;
   wordNonEnglish?: string;
   wordExpanded?: string;
@@ -40,23 +85,21 @@ export class NonEnglishTerm {
 
 export class Definition {
   authorName: string;
-  definitio?: string;
-  quality?: number;
+  definition: string;
+  quality: number;
   likes?: number;
-}
-
-export class EnglishTermCreate {
-  authorName: string;
-  wordEnglish: string;
-  wordExpanded?: string;
-  definition?: string;
-  linkAuthoritative?: string;
-  linkWikipedia?: string;
-  linkYoutube?: string;
+  dateCreated: Date;
 }
 
 export class DefinitionRequest {
+  constructor(name: string, definition: string) {
+    this.authorName = name;
+    this.definition = definition;
+  }
+  authorName: string;
   definition: string;
+  quality: number = 0;
+  likes?: number = 0;
 }
 
 export class IncrementRequest {
