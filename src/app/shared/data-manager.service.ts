@@ -4,11 +4,12 @@ import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import {
-  EnglishTerm,
+  EnglishTermApi,
   Definition,
-  NonEnglishTerm,
+  NonEnglishTermApi,
   DefinitionRequest,
-  IncrementRequest
+  IncrementRequest,
+  EnglishTermRequest
 } from './model/term.model';
 
 @Injectable({ providedIn: 'root' })
@@ -16,6 +17,8 @@ export class DataManagerService {
   constructor(private http: HttpClient) {}
 
   private url = 'https://software-dev-terms-api.herokuapp.com';
+  private englishTermUrl = 'api/terms/english';
+  private nonEnglishTermUrl = 'api/terms/other';
 
   // Options object for POST and PUT requests
   private httpOptions = {
@@ -35,103 +38,107 @@ export class DataManagerService {
     };
   }
 
-  getAllEnglishTerms(): Observable<EnglishTerm[]> {
-    return this.http.get<EnglishTerm[]>(`${this.url}/api/terms/english`);
+  getAllEnglishTerms(): Observable<EnglishTermApi[]> {
+    return this.http.get<EnglishTermApi[]>(`${this.url}/${this.englishTermUrl}`);
   }
 
-  getEnglishTermById(id: number): Observable<EnglishTerm> {
-    return this.http.get<EnglishTerm>(`${this.url}/api/terms/english/${id}`);
+  getEnglishTermById(id: number): Observable<EnglishTermApi> {
+    return this.http.get<EnglishTermApi>(`${this.url}/${this.englishTermUrl}/${id}`);
   }
-  getAllEnglishTermsByWord(word: string): Observable<EnglishTerm[]> {
-    return this.http.get<EnglishTerm[]>(`${this.url}/api/terms/english?word=${word}`);
+  getAllEnglishTermsByWord(word: string): Observable<EnglishTermApi[]> {
+    return this.http.get<EnglishTermApi[]>(`${this.url}/${this.englishTermUrl}?word=${word}`);
   }
-  getEnglishTermByWordExactMatch(word: string): Observable<EnglishTerm> {
-    return this.http.get<EnglishTerm>(`${this.url}/api/terms/english?word=${word}&exact=true`);
-  }
-
-  addEnglishTerm(newTerm: EnglishTerm): Observable<EnglishTerm> {
-    return this.http.post<EnglishTerm>(this.url, newTerm, this.httpOptions).pipe(
-      tap((newTerm: EnglishTerm) => console.log(`${newTerm} added.`)),
-      catchError(this.handleError<EnglishTerm>('English term add'))
+  getEnglishTermByWordExactMatch(word: string): Observable<EnglishTermApi> {
+    return this.http.get<EnglishTermApi>(
+      `${this.url}/${this.englishTermUrl}?word=${word}&exact=true`
     );
   }
 
-  updateEnglishTerm(id: number, newTerm: EnglishTerm): Observable<EnglishTerm> {
-    return this.http.put<EnglishTerm>(`${this.url}/${id}`, newTerm, this.httpOptions).pipe(
-      tap((newTerm: EnglishTerm) => console.log(`${newTerm} updated.`)),
-      catchError(this.handleError<EnglishTerm>('English term update'))
+  addEnglishTerm(newTerm: EnglishTermRequest): Observable<EnglishTermApi> {
+    return this.http
+      .post<EnglishTermApi>(`${this.url}/${this.englishTermUrl}`, newTerm, this.httpOptions)
+      .pipe(
+        tap((termResult: EnglishTermApi) => console.log(`${termResult.wordEnglish} added.`)),
+        catchError(this.handleError<EnglishTermApi>('English term add'))
+      );
+  }
+
+  updateEnglishTerm(id: number, newTerm: EnglishTermRequest): Observable<EnglishTermApi> {
+    return this.http.put<EnglishTermApi>(`${this.url}/${id}`, newTerm, this.httpOptions).pipe(
+      tap((newTerm: EnglishTermApi) => console.log(`${newTerm} updated.`)),
+      catchError(this.handleError<EnglishTermApi>('English term update'))
     );
   }
 
   addEnglishTermDefinition(
     termId: number,
     newDefinition: Definition
-  ): Observable<EnglishTerm> {
+  ): Observable<EnglishTermApi> {
     return this.http
-      .post<EnglishTerm>(
+      .post<EnglishTermApi>(
         `${this.url}/${termId}/add-definition`,
         newDefinition,
         this.httpOptions
       )
       .pipe(
-        tap((newTerm: EnglishTerm) => console.log(`${newDefinition} added.`)),
-        catchError(this.handleError<EnglishTerm>('Definition add'))
+        tap((newTerm: EnglishTermApi) => console.log(`${newDefinition} added.`)),
+        catchError(this.handleError<EnglishTermApi>('Definition add'))
       );
   }
 
   updateEnglishTermDefinition(
     definitionId: number,
     newDefinition: DefinitionRequest
-  ): Observable<EnglishTerm> {
+  ): Observable<EnglishTermApi> {
     return this.http
-      .put<EnglishTerm>(
+      .put<EnglishTermApi>(
         `${this.url}/${definitionId}/edit-definition`,
         newDefinition,
         this.httpOptions
       )
       .pipe(
-        tap((newTerm: EnglishTerm) => console.log(`${newDefinition} updated.`)),
-        catchError(this.handleError<EnglishTerm>('Definition update'))
+        tap((newTerm: EnglishTermApi) => console.log(`${newDefinition} updated.`)),
+        catchError(this.handleError<EnglishTermApi>('Definition update'))
       );
   }
 
   incrementHelpYesNonEnglish(
     termId: number,
     termItemId: IncrementRequest
-  ): Observable<EnglishTerm> {
+  ): Observable<EnglishTermApi> {
     return this.http
-      .put<EnglishTerm>(`${this.url}/helpyes/${termId}`, termItemId, this.httpOptions)
+      .put<EnglishTermApi>(`${this.url}/helpyes/${termId}`, termItemId, this.httpOptions)
       .pipe(
-        tap((newTerm: EnglishTerm) => console.log('Help yes incremented')),
-        catchError(this.handleError<EnglishTerm>('Help yes increment'))
+        tap((newTerm: EnglishTermApi) => console.log('Help yes incremented')),
+        catchError(this.handleError<EnglishTermApi>('Help yes increment'))
       );
   }
 
   incrementHelpNoNonEnglish(
     termId: number,
     termItemId: IncrementRequest
-  ): Observable<EnglishTerm> {
+  ): Observable<EnglishTermApi> {
     return this.http
-      .put<EnglishTerm>(`${this.url}/helpno/${termId}`, termItemId, this.httpOptions)
+      .put<EnglishTermApi>(`${this.url}/helpno/${termId}`, termItemId, this.httpOptions)
       .pipe(
-        tap((newTerm: EnglishTerm) => console.log('Help no incremented')),
-        catchError(this.handleError<EnglishTerm>('Help no increment'))
+        tap((newTerm: EnglishTermApi) => console.log('Help no incremented')),
+        catchError(this.handleError<EnglishTermApi>('Help no increment'))
       );
   }
 
   incrementLikesNonEnglish(
     definitionId: number,
     definitionItemId: IncrementRequest
-  ): Observable<EnglishTerm> {
+  ): Observable<EnglishTermApi> {
     return this.http
-      .put<EnglishTerm>(
+      .put<EnglishTermApi>(
         `${this.url}/definition-like/${definitionId}`,
         definitionItemId,
         this.httpOptions
       )
       .pipe(
         tap(() => console.log(`Like incremented`)),
-        catchError(this.handleError<EnglishTerm>('Like incremented'))
+        catchError(this.handleError<EnglishTermApi>('Like incremented'))
       );
   }
   deleteEnglishTerm(termId: number) {
@@ -140,94 +147,102 @@ export class DataManagerService {
       catchError(this.handleError('User delete'))
     );
   }
-  getAllNonEnglishTerms(): Observable<NonEnglishTerm[]> {
-    return this.http.get<NonEnglishTerm[]>(`${this.url}/api/terms/english`);
+  getAllNonEnglishTerms(): Observable<NonEnglishTermApi[]> {
+    return this.http.get<NonEnglishTermApi[]>(`${this.url}/api/terms/english`);
   }
 
-  getNonEnglishTermById(id: number): Observable<NonEnglishTerm> {
-    return this.http.get<NonEnglishTerm>(`${this.url}/api/terms/english/${id}`);
+  getNonEnglishTermById(id: number): Observable<NonEnglishTermApi> {
+    return this.http.get<NonEnglishTermApi>(`${this.url}/api/terms/english/${id}`);
   }
-  getAllNonEnglishTermsByWord(word: string): Observable<NonEnglishTerm[]> {
-    return this.http.get<NonEnglishTerm[]>(`${this.url}/api/terms/english?word=${word}`);
+  getAllNonEnglishTermsByWord(word: string): Observable<NonEnglishTermApi[]> {
+    return this.http.get<NonEnglishTermApi[]>(`${this.url}/api/terms/english?word=${word}`);
   }
 
-  addNonEnglishTerm(newTerm: NonEnglishTerm): Observable<NonEnglishTerm> {
-    return this.http.post<NonEnglishTerm>(this.url, newTerm, this.httpOptions).pipe(
-      tap((newTerm: NonEnglishTerm) => console.log(`${newTerm} added.`)),
-      catchError(this.handleError<NonEnglishTerm>('English term add'))
+  addNonEnglishTerm(newTerm: NonEnglishTermApi): Observable<NonEnglishTermApi> {
+    return this.http.post<NonEnglishTermApi>(this.url, newTerm, this.httpOptions).pipe(
+      tap((newTerm: NonEnglishTermApi) => console.log(`${newTerm} added.`)),
+      catchError(this.handleError<NonEnglishTermApi>('English term add'))
     );
   }
 
-  updateNonEnglishTerm(id: number, newTerm: NonEnglishTerm): Observable<NonEnglishTerm> {
-    return this.http.put<NonEnglishTerm>(`${this.url}/${id}`, newTerm, this.httpOptions).pipe(
-      tap((newTerm: NonEnglishTerm) => console.log(`${newTerm} updated.`)),
-      catchError(this.handleError<NonEnglishTerm>('English term update'))
-    );
+  updateNonEnglishTerm(id: number, newTerm: NonEnglishTermApi): Observable<NonEnglishTermApi> {
+    return this.http
+      .put<NonEnglishTermApi>(`${this.url}/${id}`, newTerm, this.httpOptions)
+      .pipe(
+        tap((newTerm: NonEnglishTermApi) => console.log(`${newTerm} updated.`)),
+        catchError(this.handleError<NonEnglishTermApi>('English term update'))
+      );
   }
 
   addNonEnglishTermDefinition(
     termId: number,
     newDefinition: Definition
-  ): Observable<NonEnglishTerm> {
+  ): Observable<NonEnglishTermApi> {
     return this.http
-      .post<NonEnglishTerm>(
+      .post<NonEnglishTermApi>(
         `${this.url}/${termId}/add-definition`,
         newDefinition,
         this.httpOptions
       )
       .pipe(
-        tap((newTerm: NonEnglishTerm) => console.log(`${newDefinition} added.`)),
-        catchError(this.handleError<NonEnglishTerm>('Definition add'))
+        tap((newTerm: NonEnglishTermApi) => console.log(`${newDefinition} added.`)),
+        catchError(this.handleError<NonEnglishTermApi>('Definition add'))
       );
   }
 
   updateNonEnglishTermDefinition(
     definitionId: number,
     newDefinition: DefinitionRequest
-  ): Observable<NonEnglishTerm> {
+  ): Observable<NonEnglishTermApi> {
     return this.http
-      .put<NonEnglishTerm>(
+      .put<NonEnglishTermApi>(
         `${this.url}/${definitionId}/edit-definition`,
         newDefinition,
         this.httpOptions
       )
       .pipe(
-        tap((newTerm: NonEnglishTerm) => console.log(`${newDefinition} updated.`)),
-        catchError(this.handleError<NonEnglishTerm>('Definition update'))
+        tap((newTerm: NonEnglishTermApi) => console.log(`${newDefinition} updated.`)),
+        catchError(this.handleError<NonEnglishTermApi>('Definition update'))
       );
   }
 
-  incrementHelpYes(termId: number, termItemId: IncrementRequest): Observable<NonEnglishTerm> {
+  incrementHelpYes(
+    termId: number,
+    termItemId: IncrementRequest
+  ): Observable<NonEnglishTermApi> {
     return this.http
-      .put<NonEnglishTerm>(`${this.url}/helpyes/${termId}`, termItemId, this.httpOptions)
+      .put<NonEnglishTermApi>(`${this.url}/helpyes/${termId}`, termItemId, this.httpOptions)
       .pipe(
-        tap((newTerm: NonEnglishTerm) => console.log('Help yes incremented')),
-        catchError(this.handleError<NonEnglishTerm>('Help yes increment'))
+        tap((newTerm: NonEnglishTermApi) => console.log('Help yes incremented')),
+        catchError(this.handleError<NonEnglishTermApi>('Help yes increment'))
       );
   }
 
-  incrementHelpNo(termId: number, termItemId: IncrementRequest): Observable<NonEnglishTerm> {
+  incrementHelpNo(
+    termId: number,
+    termItemId: IncrementRequest
+  ): Observable<NonEnglishTermApi> {
     return this.http
-      .put<NonEnglishTerm>(`${this.url}/helpno/${termId}`, termItemId, this.httpOptions)
+      .put<NonEnglishTermApi>(`${this.url}/helpno/${termId}`, termItemId, this.httpOptions)
       .pipe(
-        tap((newTerm: NonEnglishTerm) => console.log('Help no incremented')),
-        catchError(this.handleError<NonEnglishTerm>('Help no increment'))
+        tap((newTerm: NonEnglishTermApi) => console.log('Help no incremented')),
+        catchError(this.handleError<NonEnglishTermApi>('Help no increment'))
       );
   }
 
   incrementLikes(
     definitionId: number,
     definitionItemId: IncrementRequest
-  ): Observable<NonEnglishTerm> {
+  ): Observable<NonEnglishTermApi> {
     return this.http
-      .put<NonEnglishTerm>(
+      .put<NonEnglishTermApi>(
         `${this.url}/definition-like/${definitionId}`,
         definitionItemId,
         this.httpOptions
       )
       .pipe(
         tap(() => console.log(`Like incremented`)),
-        catchError(this.handleError<NonEnglishTerm>('Like incremented'))
+        catchError(this.handleError<NonEnglishTermApi>('Like incremented'))
       );
   }
   deleteNonEnglishTerm(termId: number) {
