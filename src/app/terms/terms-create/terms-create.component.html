@@ -5,8 +5,9 @@
         #f='ngForm'>
 
 
-    <!-- TODO: Remove later -->
-    <div *ngIf="f.submitted">Valid: {{f.valid}}</div>
+    <!-- TODO: Reomve later -->
+    <p class="lead"><code>{{ newTerm | json }}</code></p>
+    <p class="lead"><code>{{ termResult | json }}</code></p>
 
     <!-- ------------------------------------------------------------ -->
     <!-- -----------------Author Name Input------------------ -->
@@ -104,7 +105,8 @@
       <input class="form-control"
              id="link-authoritative"
              name="link-authoritative"
-             [(ngModel)]="newTerm.linkAuthoritative">
+             [(ngModel)]="newTerm.linkAuthoritative"
+             pattern="(http|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#()_-]*[\w@?^=%&amp;/~+#()_-])?">
     </div>
 
     <!-- ------------------------------------------------------------ -->
@@ -116,7 +118,8 @@
       <input class="form-control"
              id="link-wiki"
              name="link-wiki"
-             [(ngModel)]="newTerm.linkWikipedia">
+             [(ngModel)]="newTerm.linkWikipedia"
+             pattern="(http|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#()_-]*[\w@?^=%&amp;/~+#()_-])?">
     </div>
 
     <!-- ------------------------------------------------------------ -->
@@ -128,7 +131,8 @@
       <input class="form-control"
              id="link-youtube"
              name="link-youtube"
-             [(ngModel)]="newTerm.linkYoutube">
+             [(ngModel)]="newTerm.linkYoutube"
+             pattern="(http|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#()_-]*[\w@?^=%&amp;/~+#()_-])?">
     </div>
 
     <!-- ------------------------------------------------------------ -->
