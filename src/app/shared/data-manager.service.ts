@@ -110,10 +110,7 @@ export class DataManagerService {
       );
   }
 
-  incrementHelpYesEnglish(
-    termId: string,
-    termItemId: IncrementRequest
-  ): Observable<EnglishTermApi> {
+  incrementHelpYes(termId: string, termItemId: IncrementRequest): Observable<EnglishTermApi> {
     return this.http
       .put<EnglishTermApi>(
         `${this.url}/${this.englishTermUrl}/helpyes/${termId}`,

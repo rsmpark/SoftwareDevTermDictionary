@@ -17,7 +17,24 @@ export class TermDetailComponent implements OnInit {
     const id = this.route.snapshot.params['id'];
     this.dataManager.getEnglishTermById(id).subscribe(termResult => {
       this.term = termResult;
-      console.log(this.term);
     });
+  }
+
+  onLikeClick(index: number) {
+    const selectedDefinition = this.term.definitions[index];
+
+    this.dataManager
+      .incrementLikes(selectedDefinition._id, { _id: selectedDefinition._id })
+      .subscribe(termResult => (this.term = termResult));
+  }
+  onHelpYesClick() {
+    this.dataManager
+      .incrementHelpYes(this.term._id, { _id: this.term._id })
+      .subscribe(termResult => (this.term = termResult));
+  }
+  onHelpNoClick() {
+    this.dataManager
+      .incrementHelpNo(this.term._id, { _id: this.term._id })
+      .subscribe(termResult => (this.term = termResult));
   }
 }

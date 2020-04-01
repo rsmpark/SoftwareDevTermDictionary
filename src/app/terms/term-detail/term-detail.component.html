@@ -13,10 +13,14 @@
           <div *ngFor="let definition of term.definitions; let i=index"
                class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title"><button class="btn btn-default"
-                        type="submit">Like <span
-                        class="badge badge-secondary">{{term.definitions[i].likes}}</span></button> Author:
-                {{definition.authorName}} on {{definition.dateCreated}}</h3>
+              <h3 class="panel-title">
+                <button class="btn btn-default"
+                        type="button"
+                        (click)="onLikeClick(i)">Like
+                  <span class="badge badge-secondary">{{term.definitions[i].likes}}</span>
+                </button>
+                Author: {{definition.authorName}} on {{definition.dateCreated}}
+              </h3>
             </div>
             <div class="panel-body">
               {{definition.definition}}
@@ -48,9 +52,11 @@
         <dt>Wat this helpful?</dt>
         <dd>
           <button class="btn btn-default"
-                  type="submit">Yes <span class="badge badge-secondary">{{term.helpYes}}</span></button>
+                  type="button"
+                  (click)="onHelpYesClick()">Yes <span class="badge badge-secondary">{{term.helpYes}}</span></button>
           <button class="btn btn-default"
-                  type="submit">No <span class="badge badge-secondary"> {{term.helpNo}} </span> </button>
+                  type="button"
+                  (click)="onHelpNoClick()">No <span class="badge badge-secondary"> {{term.helpNo}} </span> </button>
 
         </dd>
       </dl>
