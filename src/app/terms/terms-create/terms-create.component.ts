@@ -29,7 +29,6 @@ export class TermsCreateComponent implements OnInit {
   onTermSave() {
     if (this.termCreateForm.valid) {
       this.sendCreateRequest();
-      this.router.navigate([`terms/detail/${this.termResult._id}`]);
     }
   }
 
@@ -72,12 +71,10 @@ export class TermsCreateComponent implements OnInit {
     // Remove unnecessary properties
     delete dataPackage.definition;
 
-    // this.dataManager
-    //   .addEnglishTerm(dataPackage)
-    //   .subscribe(result => (this.termResult = result));
-
-    // TODO: Remove log
-    console.log(this.termResult);
+    this.dataManager.addEnglishTerm(dataPackage).subscribe(result => {
+      this.termResult = result;
+      this.router.navigate([`terms/detail/${this.termResult._id}`]);
+    });
   }
 }
 
