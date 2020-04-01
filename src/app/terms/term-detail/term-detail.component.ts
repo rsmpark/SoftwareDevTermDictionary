@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataManagerService } from 'src/app/shared/data-manager.service';
-import { EnglishTermApi } from 'src/app/shared/model/term.model';
+import { EnglishTermApi, NonEnglishTermApi } from 'src/app/shared/model/term.model';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -10,17 +10,28 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class TermDetailComponent implements OnInit {
   term: EnglishTermApi;
+  translatedTerms: NonEnglishTermApi[];
 
-  constructor(
-    private dataManager: DataManagerService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
+  constructor(private dataManager: DataManagerService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    // Get english term by ID
     const id = this.route.snapshot.params['id'];
     this.dataManager.getEnglishTermById(id).subscribe(termResult => {
       this.term = termResult;
+    });
+
+    // Get translated terms
+    this.dataManager.getAllNonEnglishTerms().subscribe(termResults => {
+      let tempTranslateTerms = [];
+
+      // Map to find corresponding translation
+      termResults.map(termResult => {
+        if (termResult.termEnglishId === this.term._id) {
+          tempTranslateTerms.push(termResult);
+        }
+      });
+      this.translatedTerms = tempTranslateTerms;
     });
   }
 
@@ -41,4 +52,6 @@ export class TermDetailComponent implements OnInit {
       .incrementHelpNo(this.term._id, { _id: this.term._id })
       .subscribe(termResult => (this.term = termResult));
   }
+
+  onAddTranslation() {}
 }
