@@ -93,10 +93,6 @@ export class Definition {
 }
 
 export class DefinitionRequest {
-  constructor(name: string, definition: string) {
-    this.authorName = name;
-    this.definition = definition;
-  }
   authorName: string;
   definition: string;
   quality: number = 0;

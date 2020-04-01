@@ -44,7 +44,9 @@ export class TermsCreateComponent implements OnInit {
     this.newTerm.wordEnglish = wordEnglish.trim();
 
     // Create definitionData
-    const definitionData = new DefinitionRequest(this.newTerm.authorName, definition);
+    const definitionData = new DefinitionRequest();
+    definitionData.authorName = this.newTerm.authorName;
+    definitionData.definition = definition;
     createRequestData.definitions = [definitionData];
 
     // Create data package to send for POST request
