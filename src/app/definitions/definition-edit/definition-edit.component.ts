@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataManagerService } from 'src/app/shared/data-manager.service';
 import { EnglishTermApi, DefinitionRequest } from 'src/app/shared/model/term.model';
 import { ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-definition-edit',
@@ -11,6 +12,8 @@ import { ActivatedRoute } from '@angular/router';
 export class DefinitionEditComponent implements OnInit {
   term: EnglishTermApi;
   newDefinition: DefinitionRequest;
+
+  @ViewChild('f') public definitionAddForm: NgForm;
 
   constructor(private dataManager: DataManagerService, private route: ActivatedRoute) {
     this.newDefinition = new DefinitionRequest();
@@ -31,7 +34,15 @@ export class DefinitionEditComponent implements OnInit {
       .subscribe(termResult => (this.term = termResult));
   }
 
-  onReset() {}
+  onReset() {
+    this.definitionAddForm.reset();
+  }
 
-  onTermSave() {}
+  onTermSave() {
+    if (this.definitionAddForm.valid) {
+      this.dataManager
+        .addEnglishTermDefinition(this.term._id, this.newDefinition)
+        .subscribe(termResult => (this.term = termResult));
+    }
+  }
 }

@@ -80,10 +80,10 @@ export class DataManagerService {
 
   addEnglishTermDefinition(
     termId: string,
-    newDefinition: Definition
+    newDefinition: DefinitionRequest
   ): Observable<EnglishTermApi> {
     return this.http
-      .post<EnglishTermApi>(
+      .put<EnglishTermApi>(
         `${this.url}/${this.englishTermUrl}/${termId}/add-definition`,
         newDefinition,
         this.httpOptions
