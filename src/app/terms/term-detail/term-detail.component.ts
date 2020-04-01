@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataManagerService } from 'src/app/shared/data-manager.service';
 import { EnglishTermApi } from 'src/app/shared/model/term.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-term-detail',
@@ -11,7 +11,11 @@ import { ActivatedRoute } from '@angular/router';
 export class TermDetailComponent implements OnInit {
   term: EnglishTermApi;
 
-  constructor(private dataManager: DataManagerService, private route: ActivatedRoute) {}
+  constructor(
+    private dataManager: DataManagerService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
