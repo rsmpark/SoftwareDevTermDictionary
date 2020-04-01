@@ -84,9 +84,10 @@ export class NonEnglishTermRequest {
 }
 
 export class Definition {
+  _id: string;
   authorName: string;
   definition: string;
-  quality: number;
+  quality?: number;
   likes?: number;
   dateCreated: Date;
 }
