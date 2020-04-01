@@ -12,6 +12,7 @@ import { TermsListComponent } from './terms/terms-list/terms-list.component';
 import { TermDetailComponent } from './terms/term-detail/term-detail.component';
 import { TermsCreateComponent } from './terms/terms-create/terms-create.component';
 import { ExistingTermValidator } from './terms/terms-create/existing-term-validator.directive';
+import { DefinitionEditComponent } from './definitions/definition-edit/definition-edit.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ExistingTermValidator } from './terms/terms-create/existing-term-valida
     TermsListComponent,
     TermDetailComponent,
     TermsCreateComponent,
-    ExistingTermValidator
+    ExistingTermValidator,
+    DefinitionEditComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
 
