@@ -102,3 +102,9 @@ export class DefinitionRequest {
 export class IncrementRequest {
   _id: string;
 }
+
+export class ISOLanguageCodeAPI {
+  _id: string;
+  name: string;
+  code: string;
+}

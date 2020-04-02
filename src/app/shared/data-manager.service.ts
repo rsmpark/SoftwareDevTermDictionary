@@ -9,7 +9,8 @@ import {
   NonEnglishTermApi,
   DefinitionRequest,
   IncrementRequest,
-  EnglishTermRequest
+  EnglishTermRequest,
+  ISOLanguageCodeAPI
 } from './model/term.model';
 
 @Injectable({ providedIn: 'root' })
@@ -284,10 +285,15 @@ export class DataManagerService {
         catchError(this.handleError<NonEnglishTermApi>('Like incremented'))
       );
   }
+
   deleteNonEnglishTerm(termId: number) {
     return this.http.delete(`${this.url}/${this.nonEnglishTermUrl}/${termId}`).pipe(
       tap(() => console.log(`Deleted item with id ${termId}`)),
       catchError(this.handleError('User delete'))
     );
+  }
+
+  getAllLanguageCodes() {
+    return this.http.get<ISOLanguageCodeAPI[]>(`${this.url}/api/languages`);
   }
 }
