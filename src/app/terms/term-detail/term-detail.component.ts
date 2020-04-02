@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DataManagerService } from 'src/app/shared/data-manager.service';
-import { EnglishTermApi, NonEnglishTermApi } from 'src/app/shared/model/term.model';
+import {
+  EnglishTermApi,
+  NonEnglishTermApi,
+  ISOLanguageCodeAPI
+} from 'src/app/shared/model/term.model';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -11,6 +15,8 @@ import { ActivatedRoute } from '@angular/router';
 export class TermDetailComponent implements OnInit {
   term: EnglishTermApi;
   translatedTerms: NonEnglishTermApi[];
+  languageCode: ISOLanguageCodeAPI[];
+  languageNames: string[] = [];
 
   constructor(private dataManager: DataManagerService, private route: ActivatedRoute) {}
 
@@ -21,17 +27,25 @@ export class TermDetailComponent implements OnInit {
       this.term = termResult;
     });
 
-    // Get translated terms
-    this.dataManager.getAllNonEnglishTerms().subscribe(termResults => {
-      const tempTranslateTerms = [];
+    // TODO: Fix observable chaining
+    // Get ISO language codes
+    this.dataManager.getAllLanguageCodes().subscribe(results => {
+      this.languageCode = results;
 
-      // Map to find corresponding translation
-      termResults.map(termResult => {
-        if (termResult.termEnglishId === this.term._id) {
-          tempTranslateTerms.push(termResult);
-        }
+      // Get translated terms
+      this.dataManager.getAllNonEnglishTerms().subscribe(termResults => {
+        const tempTranslateTerms = [];
+
+        // Map to find corresponding translation
+        termResults.map(termResult => {
+          if (termResult.termEnglishId === this.term._id) {
+            tempTranslateTerms.push(termResult);
+            this.languageNames.push(this.getLanguageNames(termResult.languageCode));
+          }
+        });
+
+        this.translatedTerms = tempTranslateTerms;
       });
-      this.translatedTerms = tempTranslateTerms;
     });
   }
 
@@ -54,4 +68,9 @@ export class TermDetailComponent implements OnInit {
   }
 
   onAddTranslation() {}
+
+  getLanguageNames(languageCode: string) {
+    const languageCodeFound = this.languageCode.find(result => result.code === languageCode);
+    return languageCodeFound.name;
+  }
 }

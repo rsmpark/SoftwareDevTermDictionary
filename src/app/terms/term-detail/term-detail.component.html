@@ -41,6 +41,17 @@
           <dd>{{ term.authorName }}</dd>
           <dt>Dates</dt>
           <dd>Created: {{ term.dateCreated }} <br> Revised: {{ term.dateRevised }}</dd>
+          <dt>Translations</dt>
+          <dd>
+            <button class="btn btn-primary"
+                    type="button"
+                    (click)="onAddTranslation()">Add Translation
+            </button>
+            <button *ngFor="let translatedTerm of translatedTerms; let i=index"
+                    class="btn btn-default"
+                    type="button">{{languageNames[i]}}
+            </button>
+          </dd>
 
           <dt>Links Name</dt>
           <dd>
