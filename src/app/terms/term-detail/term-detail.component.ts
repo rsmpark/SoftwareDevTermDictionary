@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataManagerService } from 'src/app/shared/data-manager.service';
 import { EnglishTermApi, NonEnglishTermApi } from 'src/app/shared/model/term.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-term-detail',
@@ -23,7 +23,7 @@ export class TermDetailComponent implements OnInit {
 
     // Get translated terms
     this.dataManager.getAllNonEnglishTerms().subscribe(termResults => {
-      let tempTranslateTerms = [];
+      const tempTranslateTerms = [];
 
       // Map to find corresponding translation
       termResults.map(termResult => {
