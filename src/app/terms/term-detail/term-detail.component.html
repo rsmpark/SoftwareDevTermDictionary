@@ -9,7 +9,7 @@
             <br>({{term.definitions.length}})
             <br><button class="btn btn-default top-lg"
                     type="button"
-                    routerLink="/terms/detail/{{ term._id }}/edit-definition">Add Definition</button>
+                    [routerLink]="['/terms/detail', term._id, 'edit-definition']">Add Definition</button>
           </dt>
           <dd>
             <div *ngFor="
@@ -49,7 +49,8 @@
             </button>
             <button *ngFor="let translatedTerm of translatedTerms; let i=index"
                     class="btn btn-default"
-                    type="button">{{languageNames[i]}}
+                    type="button"
+                    (click)="onGetTranslationDetail()">{{languageNames[i]}}
             </button>
           </dd>
 
