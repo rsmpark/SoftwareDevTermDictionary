@@ -5,7 +5,7 @@ import {
   NonEnglishTermApi,
   ISOLanguageCodeAPI
 } from 'src/app/shared/model/term.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-term-detail',
@@ -18,7 +18,11 @@ export class TermDetailComponent implements OnInit {
   languageCode: ISOLanguageCodeAPI[];
   languageNames: string[] = [];
 
-  constructor(private dataManager: DataManagerService, private route: ActivatedRoute) {}
+  constructor(
+    private dataManager: DataManagerService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     // Get english term by ID
@@ -69,7 +73,14 @@ export class TermDetailComponent implements OnInit {
 
   onAddTranslation() {}
 
-  getLanguageNames(languageCode: string) {
+  onGetTranslationDetail() {
+    this.router.navigate(['edit-definition'], {
+      relativeTo: this.route,
+      queryParams: { translate: true }
+    });
+  }
+
+  private getLanguageNames(languageCode: string) {
     const languageCodeFound = this.languageCode.find(result => result.code === languageCode);
     return languageCodeFound.name;
   }
