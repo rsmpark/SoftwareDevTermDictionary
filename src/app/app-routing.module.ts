@@ -5,6 +5,7 @@ import { TermEnglishDetailComponent } from './terms/term-detail/term-detail.comp
 import { TermsCreateComponent } from './terms/terms-create/terms-create.component';
 import { DefinitionEditComponent } from './definitions/definition-edit/definition-edit.component';
 import { TermOtherDetailComponent } from './terms/term-detail/term-other-detail.component';
+import { DefinitionOtherEditComponent } from './definitions/definition-edit/definition-other-edit.component';
 
 const routes: Routes = [
   { path: 'termsEnglish', component: TermsListComponent },
@@ -12,7 +13,7 @@ const routes: Routes = [
   { path: 'termsEnglish/detail/:id', component: TermEnglishDetailComponent },
   { path: 'termsEnglish/detail/:id/edit-definition', component: DefinitionEditComponent },
   { path: 'termsOther/detail/:id', component: TermOtherDetailComponent },
-  { path: 'termsOther/detail/:id/edit-definition', component: DefinitionEditComponent }
+  { path: 'termsOther/detail/:id/edit-definition', component: DefinitionOtherEditComponent }
 ];
 
 @NgModule({
