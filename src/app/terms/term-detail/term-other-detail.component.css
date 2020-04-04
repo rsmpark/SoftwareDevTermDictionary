@@ -1,0 +1,15 @@
+dd,
+dt {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.top-lg {
+  margin-top: 12px;
+}
+
+.link-button,
+.help-button {
+  margin-bottom: 6px;
+  margin-right: 8px;
+}
