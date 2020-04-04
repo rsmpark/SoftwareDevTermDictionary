@@ -21,9 +21,17 @@ export class DefinitionEditComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
-    this.dataManager.getEnglishTermById(id).subscribe(termResult => {
-      this.term = termResult;
-    });
+    const translationId = this.route.snapshot.queryParams.translationId;
+
+    if (translationId) {
+      this.dataManager.getNonEnglishTermById(translationId).subscribe(termResult => {
+        this.term = termResult;
+      });
+    } else {
+      this.dataManager.getEnglishTermById(id).subscribe(termResult => {
+        this.term = termResult;
+      });
+    }
   }
 
   onLikeClick(index: number) {

@@ -1,0 +1,30 @@
+dd,
+dt {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.top-lg {
+  margin-top: 12px;
+}
+
+.link-button,
+.help-button {
+  margin-bottom: 6px;
+  margin-right: 8px;
+}
+
+/* Validation CSS */
+
+div,
+.custom-container {
+  margin-right: 30px;
+}
+.ng-valid[required],
+.ng-valid.required {
+  border-left: 5px solid #42a948; /* green */
+}
+
+.ng-invalid:not(form) {
+  border-left: 5px solid #a94442; /* red */
+}

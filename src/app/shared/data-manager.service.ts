@@ -258,8 +258,8 @@ export class DataManagerService {
     newDefinition: DefinitionRequest
   ): Observable<NonEnglishTermApi> {
     return this.http
-      .post<NonEnglishTermApi>(
-        `${this.url}/${termId}/${this.nonEnglishTermUrl}/${termId}/add-definition`,
+      .put<NonEnglishTermApi>(
+        `${this.url}/${this.nonEnglishTermUrl}/${termId}/add-definition`,
         newDefinition,
         this.httpOptions
       )

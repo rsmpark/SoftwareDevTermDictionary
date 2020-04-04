@@ -1,0 +1,101 @@
+<div class="container-fluid">
+  <div *ngIf="term; else notFound">
+    <h3>English Term detail</h3>
+    <p>&nbsp;</p>
+    <div class="row">
+      <div class="col-md-10">
+        <dl class="dl-horizontal">
+          <dt>New Definition
+          </dt>
+          <dd>
+            <form (ngSubmit)='onTermSave()'
+                  #f='ngForm'>
+              <div class="form-group">
+                <label class="control-label"
+                       for="author">Author Name:</label>
+                <input class="form-control"
+                       id="author"
+                       name="author"
+                       [(ngModel)]="newDefinition.authorName"
+                       #authorName="ngModel"
+                       required
+                       autofocus>
+
+                <!-- If field is empty after submission -->
+                <div *ngIf="f.submitted && authorName.invalid"
+                     class='alert alert-danger'>
+                  <div *ngIf="authorName.errors.required">Term required</div>
+                </div>
+
+              </div>
+              <div class="form-group">
+                <label class="control-label"
+                       for="definition">Definition</label>
+                <textarea class="form-control"
+                          id="definition"
+                          name="definition"
+                          [(ngModel)]="newDefinition.definition"
+                          #definition="ngModel"
+                          required></textarea>
+              </div>
+
+              <!-- Validation error area -->
+              <!-- If field is empty after submission -->
+              <div *ngIf="f.submitted && definition.invalid"
+                   class='alert alert-danger'>
+                <div *ngIf="definition.errors.required">Definition required</div>
+              </div>
+
+
+              <button class="btn btn-primary"
+                      type="submit">Save</button>&nbsp;
+              <button class="btn btn-danger"
+                      type="reset"
+                      (click)="onReset()">Reset</button>&nbsp;
+            </form>
+          </dd>
+          <dt>Existing Definition <br>({{term.definitions.length}})</dt>
+          <dd>
+            <div *ngFor="
+                    let
+                    definition
+                    of
+                    term.definitions;
+                    let
+                    i=index"
+                 class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">
+                  <button class="btn btn-default"
+                          type="button"
+                          (click)="onLikeClick(i)">Like
+                    <span class="badge badge-secondary">{{term.definitions[i].likes}}</span>
+                  </button>
+                  Author: {{definition.authorName}} on {{definition.dateCreated}}
+                </h3>
+              </div>
+              <div class="panel-body">
+                {{definition.definition}}
+              </div>
+            </div>
+          </dd>
+          <dt>Field of Study</dt>
+          <dd>{{ term.fieldOfStudy }}</dd>
+
+        </dl>
+      </div>
+
+    </div>
+    <div>
+      <hr>
+      <a routerLink="/termsEnglish"
+         class="btn btn-default">Back to list</a>
+    </div>
+  </div>
+
+  <ng-template #notFound>
+    <p>Requested term was not found</p>
+    <p><a routerLink="/termsEnglish"
+         class="btn btn-default">Back to list</a></p>
+  </ng-template>
+</div>
