@@ -8,11 +8,11 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-term-detail',
+  selector: 'app-term-english-detail',
   templateUrl: './term-detail.component.html',
   styleUrls: ['./term-detail.component.css']
 })
-export class TermDetailComponent implements OnInit {
+export class TermEnglishDetailComponent implements OnInit {
   term: EnglishTermApi;
   translatedTerms: NonEnglishTermApi[];
   languageCode: ISOLanguageCodeAPI[];
@@ -73,11 +73,8 @@ export class TermDetailComponent implements OnInit {
 
   onAddTranslation() {}
 
-  onGetTranslationDetail() {
-    this.router.navigate(['edit-definition'], {
-      relativeTo: this.route,
-      queryParams: { translate: true }
-    });
+  onGetTranslationDetail(index: number) {
+    this.router.navigate([`termsOther/detail/${this.translatedTerms[index]._id}`]);
   }
 
   private getLanguageNames(languageCode: string) {
