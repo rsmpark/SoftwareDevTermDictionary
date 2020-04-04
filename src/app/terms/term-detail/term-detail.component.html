@@ -9,7 +9,7 @@
             <br>({{term.definitions.length}})
             <br><button class="btn btn-default top-lg"
                     type="button"
-                    [routerLink]="['/terms/detail', term._id, 'edit-definition']">Add Definition</button>
+                    [routerLink]="['/termsEnglish/detail', term._id, 'edit-definition']">Add Definition</button>
           </dt>
           <dd>
             <div *ngFor="
@@ -50,7 +50,7 @@
             <button *ngFor="let translatedTerm of translatedTerms; let i=index"
                     class="btn btn-default"
                     type="button"
-                    (click)="onGetTranslationDetail()">{{languageNames[i]}}
+                    (click)="onGetTranslationDetail(i)">{{languageNames[i]}}
             </button>
           </dd>
 
@@ -85,14 +85,14 @@
     </div>
     <div>
       <hr>
-      <a routerLink="/terms"
+      <a routerLink="/termsEnglish"
          class="btn btn-default">Back to list</a>
     </div>
   </div>
 
   <ng-template #notFound>
     <p>Requested user was not found</p>
-    <p><a routerLink="/terms"
+    <p><a routerLink="/termsEnglish"
          class="btn btn-default">Back to list</a></p>
   </ng-template>
 </div>

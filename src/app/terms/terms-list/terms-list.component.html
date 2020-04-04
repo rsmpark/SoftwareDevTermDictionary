@@ -16,7 +16,7 @@
            [(ngModel)]="searchWord"
            (ngModelChange)="onSearchWord()">
   </div>
-  <a routerLink="/terms/create"
+  <a routerLink="/termsEnglish/create"
      class="btn btn-primary">New</a>&nbsp;
   <div class="form-group">
 
@@ -40,7 +40,7 @@
       <td class="col-xs-8">{{ term.definitions[0].definition }}</td>
       <td class="col-xs-3">{{term.fieldOfStudy}}</td>
       <td class="col-xs-5">
-        <a routerLink="/terms/detail/{{ term._id }}"
+        <a routerLink="/termsEnglish/detail/{{ term._id }}"
            class="btn btn-default">Detail</a>&nbsp;
       </td>
     </tr>

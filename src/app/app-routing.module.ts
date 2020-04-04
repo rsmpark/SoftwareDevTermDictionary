@@ -6,10 +6,10 @@ import { TermsCreateComponent } from './terms/terms-create/terms-create.componen
 import { DefinitionEditComponent } from './definitions/definition-edit/definition-edit.component';
 
 const routes: Routes = [
-  { path: 'terms', component: TermsListComponent },
-  { path: 'terms/create', component: TermsCreateComponent },
-  { path: 'terms/detail/:id', component: TermDetailComponent },
-  { path: 'terms/detail/:id/edit-definition', component: DefinitionEditComponent }
+  { path: 'termsEnglish', component: TermsListComponent },
+  { path: 'termsEnglish/create', component: TermsCreateComponent },
+  { path: 'termsEnglish/detail/:id', component: TermDetailComponent },
+  { path: 'termsEnglish/detail/:id/edit-definition', component: DefinitionEditComponent }
 ];
 
 @NgModule({
