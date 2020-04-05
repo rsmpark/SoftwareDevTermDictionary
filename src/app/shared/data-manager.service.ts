@@ -5,7 +5,6 @@ import { catchError, tap } from 'rxjs/operators';
 
 import {
   EnglishTermApi,
-  Definition,
   NonEnglishTermApi,
   DefinitionRequest,
   IncrementRequest,
@@ -19,6 +18,7 @@ export class DataManagerService {
   constructor(private http: HttpClient) {}
 
   private url = 'https://software-dev-terms-api.herokuapp.com';
+  // private url = 'http://localhost:8080';
   private englishTermUrl = 'api/terms/english';
   private nonEnglishTermUrl = 'api/terms/other';
 
@@ -222,8 +222,8 @@ export class DataManagerService {
     );
   }
 
-  getNonEnglishTermByWordExactMatch(word: string): Observable<EnglishTermApi> {
-    return this.http.get<EnglishTermApi>(
+  getNonEnglishTermByWordExactMatch(word: string): Observable<NonEnglishTermApi> {
+    return this.http.get<NonEnglishTermApi>(
       `${this.url}/${this.nonEnglishTermUrl}?word=${word}&exact=true`
     );
   }
