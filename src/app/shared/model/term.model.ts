@@ -75,11 +75,10 @@ export class NonEnglishTermRequest {
   linkWikipedia?: string;
   linkYouTube?: string;
   authorName: string;
-
   fieldOfStudy?: string;
   helpYes?: number;
   helpNo?: number;
-  definitions: [Definition];
+  definitions: [DefinitionRequest];
   termEnglishId: string;
 }
 
