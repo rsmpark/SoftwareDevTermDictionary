@@ -15,6 +15,7 @@ import { ExistingTermValidator } from './terms/terms-create/existing-term-valida
 import { DefinitionEditComponent } from './definitions/definition-edit/definition-edit.component';
 import { TermOtherDetailComponent } from './terms/term-detail/term-other-detail.component';
 import { DefinitionOtherEditComponent } from './definitions/definition-edit/definition-other-edit.component';
+import { AddTranslationComponent } from './translation/add-translation/add-translation.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { DefinitionOtherEditComponent } from './definitions/definition-edit/defi
     ExistingTermValidator,
     DefinitionEditComponent,
     TermOtherDetailComponent,
-    DefinitionOtherEditComponent
+    DefinitionOtherEditComponent,
+    AddTranslationComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
 
