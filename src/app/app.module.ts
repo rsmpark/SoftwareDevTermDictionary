@@ -11,7 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { TermsListComponent } from './terms/terms-list/terms-list.component';
 import { TermEnglishDetailComponent } from './terms/term-detail/term-detail.component';
 import { TermsCreateComponent } from './terms/terms-create/terms-create.component';
-import { ExistingTermValidator } from './terms/terms-create/existing-term-validator.directive';
+import { ExistingTermValidator } from './shared/existing-term-validator.directive';
 import { DefinitionEditComponent } from './definitions/definition-edit/definition-edit.component';
 import { TermOtherDetailComponent } from './terms/term-detail/term-other-detail.component';
 import { DefinitionOtherEditComponent } from './definitions/definition-edit/definition-other-edit.component';
@@ -29,11 +29,11 @@ import { AddTranslationComponent } from './translation/add-translation/add-trans
     DefinitionEditComponent,
     TermOtherDetailComponent,
     DefinitionOtherEditComponent,
-    AddTranslationComponent
+    AddTranslationComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
 
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

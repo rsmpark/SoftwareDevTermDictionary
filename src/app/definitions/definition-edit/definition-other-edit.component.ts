@@ -7,7 +7,7 @@ import { DataManagerService } from 'src/app/shared/data-manager.service';
 @Component({
   selector: 'app-definition-other-edit',
   templateUrl: './definition-other-edit.component.html',
-  styleUrls: ['./definition-other-edit.component.css']
+  styleUrls: ['./definition-other-edit.component.css'],
 })
 export class DefinitionOtherEditComponent implements OnInit {
   term: NonEnglishTermApi;
@@ -22,7 +22,7 @@ export class DefinitionOtherEditComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
 
-    this.dataManager.getNonEnglishTermById(id).subscribe(termResult => {
+    this.dataManager.getNonEnglishTermById(id).subscribe((termResult) => {
       this.term = termResult;
     });
   }
@@ -32,7 +32,7 @@ export class DefinitionOtherEditComponent implements OnInit {
 
     this.dataManager
       .incrementLikesOther(selectedDefinition._id, { _id: selectedDefinition._id })
-      .subscribe(termResult => (this.term = termResult));
+      .subscribe((termResult) => (this.term = termResult));
   }
 
   onReset() {
@@ -43,7 +43,7 @@ export class DefinitionOtherEditComponent implements OnInit {
     if (this.definitionAddForm.valid) {
       this.dataManager
         .addNonEnglishTermDefinition(this.term._id, this.newDefinition)
-        .subscribe(termResult => (this.term = termResult));
+        .subscribe((termResult) => (this.term = termResult));
     }
   }
 }

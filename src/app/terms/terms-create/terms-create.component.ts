@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   EnglishTermApi,
   EnglishTermRequest,
-  DefinitionRequest
+  DefinitionRequest,
 } from 'src/app/shared/model/term.model';
 import { DataManagerService } from 'src/app/shared/data-manager.service';
 import { NgForm } from '@angular/forms';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-terms-create',
   templateUrl: './terms-create.component.html',
-  styleUrls: ['./terms-create.component.css']
+  styleUrls: ['./terms-create.component.css'],
 })
 export class TermsCreateComponent implements OnInit {
   newTerm: DataForm;
@@ -65,15 +65,15 @@ export class TermsCreateComponent implements OnInit {
       fieldOfStudy: '',
       helpYes: 0,
       helpNo: 0,
-      ...this.newTerm
+      ...this.newTerm,
     };
 
     // Remove unnecessary properties
     delete dataPackage.definition;
 
-    this.dataManager.addEnglishTerm(dataPackage).subscribe(result => {
+    this.dataManager.addEnglishTerm(dataPackage).subscribe((result) => {
       this.termResult = result;
-      this.router.navigate([`terms/detail/${this.termResult._id}`]);
+      this.router.navigate([`termsEnglish/detail/${this.termResult._id}`]);
     });
   }
 }
