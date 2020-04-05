@@ -1,0 +1,157 @@
+<h3>Create a new translation for <em *ngIf="englishTerm">{{englishTerm.wordEnglish || ""}}</em></h3>
+<form (ngSubmit)='submitNewTranslation()'
+      #f='ngForm'>
+
+
+  <div class="form-group">
+    <label class="control-label"
+           for="favouriteTransportation">Favourite Transportation:</label>
+    <select class="form-control"
+            name="favouriteTransportation"
+            [(ngModel)]="newTerm.languageCode">
+      <option *ngFor="let langCode of languageCodes"
+              [value]="langCode.code">{{langCode.name|| ""}}</option>
+    </select>
+  </div>
+
+  <!-- ------------------------------------------------------------ -->
+  <!-- -----------------Author Name Input------------------ -->
+  <!-- ------------------------------------------------------------ -->
+  <div class="form-group">
+    <label class="control-label"
+           for="author">Author Name:</label>
+    <input class="form-control"
+           id="author"
+           name="author"
+           [(ngModel)]="newTerm.authorName"
+           #authorName="ngModel"
+           required
+           autofocus>
+
+  </div>
+
+  <!-- Validation error area -->
+  <!-- If field is empty after submission -->
+  <div *ngIf="f.submitted && authorName.invalid"
+       class='alert alert-danger'>
+    <div *ngIf="authorName.errors.required">Name required</div>
+  </div>
+
+  <!-- ------------------------------------------------------------ -->
+  <!-- -----------------Term Input------------------ -->
+  <!-- ------------------------------------------------------------ -->
+  <div class="form-group">
+    <label class="control-label"
+           for="term">Term</label>
+    <input class="form-control"
+           id="term"
+           name="term"
+           type="text"
+           [(ngModel)]="newTerm.wordNonEnglish"
+           #term="ngModel"
+           appExistingTerm
+           [isTermEnglish]="false"
+           required>
+  </div>
+
+  <!-- Validation error area -->
+  <!-- If existing term is found -->
+  <div *ngIf='term.errors?.existingTermFound '
+       class='alert alert-danger'>
+    <!-- The code below is situation-dependent - think before coding -->
+    <div *ngIf='term.errors.existingTermFound'>Term already exists!</div>
+  </div>
+  <!-- If field is empty after submission -->
+  <div *ngIf="f.submitted && term.invalid"
+       class='alert alert-danger'>
+    <div *ngIf="term.errors.required">Term required</div>
+  </div>
+
+
+  <!-- ------------------------------------------------------------ -->
+  <!-- -----------------Field of Study------------------ -->
+  <!-- ------------------------------------------------------------ -->
+  <div class="form-group">
+    <label class="control-label"
+           for="fieldOfStudy">Field of Study:</label>
+    <input class="form-control"
+           id="fieldOfStudy"
+           name="fieldOfStudy"
+           [(ngModel)]="newTerm.fieldOfStudy">
+  </div>
+
+
+  <!-- ------------------------------------------------------------ -->
+  <!-- -----------------Definition Input------------------ -->
+  <!-- ------------------------------------------------------------ -->
+  <div class="form-group">
+    <label class="control-label"
+           for="definition">Definition</label>
+    <textarea class="form-control"
+              id="definition"
+              name="definition"
+              [(ngModel)]="newTerm.definition"
+              #definition="ngModel"
+              required></textarea>
+  </div>
+
+  <!-- Validation error area -->
+  <!-- If field is empty after submission -->
+  <div *ngIf="f.submitted && definition.invalid"
+       class='alert alert-danger'>
+    <div *ngIf="definition.errors.required">Definition required</div>
+  </div>
+
+
+
+  <!-- ------------------------------------------------------------ -->
+  <!-- -----------------Authoritative Link Input------------------ -->
+  <!-- ------------------------------------------------------------ -->
+  <div class="form-group">
+    <label class="control-label"
+           for="link-authoritative">Authoritative Link</label>
+    <input class="form-control"
+           id="link-authoritative"
+           name="link-authoritative"
+           [(ngModel)]="newTerm.linkAuthoritative"
+           pattern="(http|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#()_-]*[\w@?^=%&amp;/~+#()_-])?">
+  </div>
+
+
+
+  <!-- ------------------------------------------------------------ -->
+  <!-- -----------------Wiki Link Input------------------ -->
+  <!-- ------------------------------------------------------------ -->
+  <div class="form-group">
+    <label class="control-label"
+           for="link-wiki">Wiki Link</label>
+    <input class="form-control"
+           id="link-wiki"
+           name="link-wiki"
+           [(ngModel)]="newTerm.linkWikipedia"
+           pattern="(http|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#()_-]*[\w@?^=%&amp;/~+#()_-])?">
+  </div>
+
+  <!-- ------------------------------------------------------------ -->
+  <!-- -----------------Youtube Link Input------------------ -->
+  <!-- ------------------------------------------------------------ -->
+  <div class="form-group">
+    <label class="control-label"
+           for="link-youtube">YouTube Link</label>
+    <input class="form-control"
+           id="link-youtube"
+           name="link-youtube"
+           [(ngModel)]="newTerm.linkYoutube"
+           pattern="(http|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#()_-]*[\w@?^=%&amp;/~+#()_-])?">
+  </div>
+
+
+
+
+  <button class="btn btn-primary"
+          type="submit">Create</button>
+
+</form>
+<br>
+<h4>Data from the form:</h4>
+<p><code>{{ newTerm | json }}</code></p>
