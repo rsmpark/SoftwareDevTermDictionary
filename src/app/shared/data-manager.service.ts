@@ -10,7 +10,8 @@ import {
   DefinitionRequest,
   IncrementRequest,
   EnglishTermRequest,
-  ISOLanguageCodeAPI
+  ISOLanguageCodeAPI,
+  NonEnglishTermRequest,
 } from './model/term.model';
 
 @Injectable({ providedIn: 'root' })
@@ -24,8 +25,8 @@ export class DataManagerService {
   // Options object for POST and PUT requests
   private httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
+      'Content-Type': 'application/json',
+    }),
   };
 
   // Error handler, from the Angular docs
@@ -227,7 +228,7 @@ export class DataManagerService {
     );
   }
 
-  addNonEnglishTerm(newTerm: NonEnglishTermApi): Observable<NonEnglishTermApi> {
+  addNonEnglishTerm(newTerm: NonEnglishTermRequest): Observable<NonEnglishTermApi> {
     return this.http
       .post<NonEnglishTermApi>(
         `${this.url}/${this.nonEnglishTermUrl}`,
