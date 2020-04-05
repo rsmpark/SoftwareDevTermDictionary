@@ -1,6 +1,7 @@
 <div class="container-fluid">
   <div *ngIf="term; else notFound">
-    <h3>Add Definition</h3>
+    <h3>Non-English Term Detail - {{term.wordNonEnglish}} <br> ({{languageName}} for <em>{{term.wordEnglish}}</em></h3>
+
     <p>&nbsp;</p>
     <div class="row">
       <div class="col-md-10">
