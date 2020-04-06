@@ -40,6 +40,10 @@ export class DataManagerService {
     };
   }
 
+  /* ********************************************************************************** */
+  /****************************** EnglishTerm API Requests ******************************/
+  /* ********************************************************************************** */
+
   getAllEnglishTerms(): Observable<EnglishTermApi[]> {
     return this.http.get<EnglishTermApi[]>(`${this.url}/${this.englishTermUrl}`);
   }
@@ -202,11 +206,17 @@ export class DataManagerService {
   }
 
   deleteEnglishTerm(termId: string) {
+    this.getNonEnglishTermsByTermEnglishId(termId).subscribe();
+
     return this.http.delete(`${this.url}/${this.englishTermUrl}/${termId}`).pipe(
       tap(() => console.log(`Deleted item with id ${termId}`)),
       catchError(this.handleError('User delete'))
     );
   }
+
+  /* ********************************************************************************** */
+  /****************************** NonEnglishTerm API Requests ******************************/
+  /* ********************************************************************************** */
 
   getAllNonEnglishTerms(): Observable<NonEnglishTermApi[]> {
     return this.http.get<NonEnglishTermApi[]>(`${this.url}/${this.nonEnglishTermUrl}`);
@@ -214,6 +224,12 @@ export class DataManagerService {
 
   getNonEnglishTermById(id: string): Observable<NonEnglishTermApi> {
     return this.http.get<NonEnglishTermApi>(`${this.url}/${this.nonEnglishTermUrl}/${id}`);
+  }
+
+  getNonEnglishTermsByTermEnglishId(id: string): Observable<NonEnglishTermApi[]> {
+    return this.http.get<NonEnglishTermApi[]>(
+      `${this.url}/${this.nonEnglishTermUrl}/termEnglishId${id}`
+    );
   }
 
   getAllNonEnglishTermsByWord(word: string): Observable<NonEnglishTermApi[]> {
