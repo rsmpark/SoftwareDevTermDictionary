@@ -17,6 +17,7 @@ import { TermOtherDetailComponent } from './terms/term-detail/term-other-detail.
 import { DefinitionOtherEditComponent } from './definitions/definition-edit/definition-other-edit.component';
 import { AddTranslationComponent } from './translation/add-translation/add-translation.component';
 import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AboutComponent } from './about/about.component';
     DefinitionOtherEditComponent,
     AddTranslationComponent,
     AboutComponent,
+    ContactComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
 

@@ -9,6 +9,7 @@ import { DefinitionOtherEditComponent } from './definitions/definition-edit/defi
 import { AddTranslationComponent } from './translation/add-translation/add-translation.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
 
 const routes: Routes = [
   { path: 'termsEnglish', component: TermsListComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'termsOther/detail/:id/edit-definition', component: DefinitionOtherEditComponent },
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
+  { path: 'contact', component: ContactComponent },
 ];
 
 @NgModule({
