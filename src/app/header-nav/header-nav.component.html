@@ -1,32 +1,37 @@
 <header>
   <h3>Software Development Dictionary</h3>
 </header>
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-inverse navbar-static-top">
   <div class="container-fluid">
-    <!-- Main left-side "home" link -->
+    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <a routerLink="/home"
-         class="navbar-brand"
-         routerLinkActive="active"
-         [routerLinkActiveOptions]="{exact: true}">Home</a>
+      <button type="button"
+              class="navbar-toggle collapsed"
+              data-toggle="collapse"
+              data-target="#bs-example-navbar-collapse-1"
+              aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand"
+         routerLink="home"
+         routerLinkActive="active">Home</a>
     </div>
-    <!-- Other links -->
-    <div class="collapse navbar-collapse">
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse"
+         id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li>
-          <a routerLink="/about"
-             routerLinkActive="active">About</a>
-        </li>
-        <li>
-          <a routerLink="/termsEnglish"
-             routerLinkActive="active">Terms</a>
-        </li>
-        <li>
-          <a routerLink="/contact"
-             routerLinkActive="active">Contact</a>
-        </li>
+        <li><a routerLink="about"
+             routerLinkActive="active">About</a></li>
+        <li><a routerLink="contact"
+             routerLinkActive="active">Contact</a></li>
+        <li><a routerLink="/termsEnglish"
+             routerLinkActive="active">Terms</a></li>
 
       </ul>
-    </div>
-  </div>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
 </nav>
