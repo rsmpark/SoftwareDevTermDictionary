@@ -17,8 +17,8 @@ import {
 export class DataManagerService {
   constructor(private http: HttpClient) {}
 
-  private url = 'https://software-dev-terms-api.herokuapp.com';
-  // private url = 'http://localhost:8080';
+  // private url = 'https://software-dev-terms-api.herokuapp.com';
+  private url = 'http://localhost:8080';
   private englishTermUrl = 'api/terms/english';
   private nonEnglishTermUrl = 'api/terms/other';
 
@@ -206,8 +206,6 @@ export class DataManagerService {
   }
 
   deleteEnglishTerm(termId: string) {
-    this.getNonEnglishTermsByTermEnglishId(termId).subscribe();
-
     return this.http.delete(`${this.url}/${this.englishTermUrl}/${termId}`).pipe(
       tap(() => console.log(`Deleted item with id ${termId}`)),
       catchError(this.handleError('User delete'))
@@ -228,7 +226,7 @@ export class DataManagerService {
 
   getNonEnglishTermsByTermEnglishId(id: string): Observable<NonEnglishTermApi[]> {
     return this.http.get<NonEnglishTermApi[]>(
-      `${this.url}/${this.nonEnglishTermUrl}/termEnglishId${id}`
+      `${this.url}/${this.nonEnglishTermUrl}/termEnglishId/${id}`
     );
   }
 
@@ -350,7 +348,7 @@ export class DataManagerService {
       );
   }
 
-  deleteNonEnglishTerm(termId: number) {
+  deleteNonEnglishTerm(termId: string) {
     return this.http.delete(`${this.url}/${this.nonEnglishTermUrl}/${termId}`).pipe(
       tap(() => console.log(`Deleted item with id ${termId}`)),
       catchError(this.handleError('User delete'))
