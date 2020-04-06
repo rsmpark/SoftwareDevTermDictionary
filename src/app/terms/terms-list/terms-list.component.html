@@ -34,14 +34,20 @@
   </thead>
   <tbody>
     <tr class="d-flex"
-        *ngFor='let term of terms'>
+        *ngFor='let term of terms; let i=index'>
       <td class="col-xs-1">{{ term.wordEnglish }}</td>
       <td class="col-xs-1">{{ term.authorName}}</td>
       <td class="col-xs-8">{{ term.definitions[0].definition }}</td>
       <td class="col-xs-3">{{term.fieldOfStudy}}</td>
       <td class="col-xs-5">
-        <a routerLink="/termsEnglish/detail/{{ term._id }}"
+
+        <a class="col-xs-2"
+           routerLink="/termsEnglish/detail/{{ term._id }}"
            class="btn btn-default">Detail</a>&nbsp;
+        <br> <button class="btn btn-danger top-lg"
+                type="button"
+                [routerLink]="['/termsEnglish']"
+                (click)="onRemoveTerm(i)">Remove</button>
       </td>
     </tr>
   </tbody>

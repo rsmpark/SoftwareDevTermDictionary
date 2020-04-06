@@ -5,11 +5,10 @@ import { DataManagerService } from 'src/app/shared/data-manager.service';
 @Component({
   selector: 'app-terms-list',
   templateUrl: './terms-list.component.html',
-  styleUrls: ['./terms-list.component.css']
+  styleUrls: ['./terms-list.component.css'],
 })
 export class TermsListComponent implements OnInit {
   terms: EnglishTermApi[];
-  term: EnglishTermApi;
 
   @Input() searchWord: string;
 
@@ -27,6 +26,19 @@ export class TermsListComponent implements OnInit {
       .getAllEnglishTermsByWord(this.searchWord)
       .subscribe((termsMatched: EnglishTermApi[]) => {
         this.terms = termsMatched;
+      });
+  }
+
+  onRemoveTerm(index: number) {
+    const englishTermId = this.terms[index]._id;
+    this.dataManager.deleteEnglishTerm(englishTermId).subscribe();
+
+    this.dataManager
+      .getNonEnglishTermsByTermEnglishId(englishTermId)
+      .subscribe((nonEnglishTerm) => {
+        nonEnglishTerm.forEach((term) => {
+          this.dataManager.deleteNonEnglishTerm(term._id).subscribe();
+        });
       });
   }
 }
