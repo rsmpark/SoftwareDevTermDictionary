@@ -8,6 +8,7 @@ import { TermOtherDetailComponent } from './terms/term-detail/term-other-detail.
 import { DefinitionOtherEditComponent } from './definitions/definition-edit/definition-other-edit.component';
 import { AddTranslationComponent } from './translation/add-translation/add-translation.component';
 import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
 
 const routes: Routes = [
   { path: 'termsEnglish', component: TermsListComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'termsOther/detail/:id', component: TermOtherDetailComponent },
   { path: 'termsOther/detail/:id/edit-definition', component: DefinitionOtherEditComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'about', component: AboutComponent },
 ];
 
 @NgModule({
