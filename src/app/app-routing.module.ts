@@ -14,6 +14,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   { path: 'termsEnglish', component: TermsListComponent },
+
   { path: 'termsEnglish/create', component: TermsCreateComponent },
   { path: 'termsEnglish/detail/:id', component: TermEnglishDetailComponent },
   { path: 'termsEnglish/detail/:id/edit-definition', component: DefinitionEditComponent },
@@ -28,7 +29,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
