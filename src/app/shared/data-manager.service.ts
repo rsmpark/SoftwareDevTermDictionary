@@ -17,8 +17,8 @@ import {
 export class DataManagerService {
   constructor(private http: HttpClient) {}
 
-  // private url = 'https://software-dev-terms-api.herokuapp.com';
-  private url = 'http://localhost:8080';
+  private url = 'https://software-dev-terms-api.herokuapp.com';
+  // private url = 'http://localhost:8080';
   private englishTermUrl = 'api/terms/english';
   private nonEnglishTermUrl = 'api/terms/other';
 

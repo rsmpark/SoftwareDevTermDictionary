@@ -1,5 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NonEnglishTermApi, DefinitionRequest } from 'src/app/shared/model/term.model';
+import {
+  NonEnglishTermApi,
+  DefinitionRequest,
+  Definition,
+} from 'src/app/shared/model/term.model';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DataManagerService } from 'src/app/shared/data-manager.service';
@@ -12,6 +16,8 @@ import { DataManagerService } from 'src/app/shared/data-manager.service';
 export class DefinitionOtherEditComponent implements OnInit {
   term: NonEnglishTermApi;
   newDefinition: DefinitionRequest;
+  isEditable = false;
+  editedDefinition: Definition[];
 
   @ViewChild('f') public definitionAddForm: NgForm;
 
@@ -24,6 +30,7 @@ export class DefinitionOtherEditComponent implements OnInit {
 
     this.dataManager.getNonEnglishTermById(id).subscribe((termResult) => {
       this.term = termResult;
+      this.editedDefinition = termResult.definitions;
     });
   }
 
@@ -45,5 +52,23 @@ export class DefinitionOtherEditComponent implements OnInit {
         .addNonEnglishTermDefinition(this.term._id, this.newDefinition)
         .subscribe((termResult) => (this.term = termResult));
     }
+  }
+
+  onEdit() {
+    this.isEditable = true;
+  }
+
+  onEditSave(index: number) {
+    const definitionRequest = { ...this.editedDefinition[index] };
+
+    delete definitionRequest._id;
+
+    this.dataManager
+      .updateNonEnglishTermDefinition(this.editedDefinition[index]._id, definitionRequest)
+      .subscribe((newTerm) => {
+        this.editedDefinition = newTerm.definitions;
+        this.term = newTerm;
+        this.isEditable = false;
+      });
   }
 }

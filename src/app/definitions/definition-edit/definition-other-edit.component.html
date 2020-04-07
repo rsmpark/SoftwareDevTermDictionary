@@ -66,16 +66,37 @@
                  class="panel panel-default">
               <div class="panel-heading">
                 <h3 class="panel-title">
-                  <button class="btn btn-default"
+                  <button class="btn btn-default btn-sm btn-mrg-right"
                           type="button"
                           (click)="onLikeClick(i)">Like
                     <span class="badge badge-secondary">{{term.definitions[i].likes}}</span>
                   </button>
+                  <button class="btn btn-primary btn-sm btn-mrg-right"
+                          (click)="onEdit()">Edit</button>
                   Author: {{definition.authorName}} on {{definition.dateCreated}}
                 </h3>
               </div>
               <div class="panel-body">
-                {{definition.definition}}
+                <div *ngIf="!isEditable; else displayInput">
+                  {{definition.definition}}
+                </div>
+                <ng-template #displayInput>
+                  <div>
+                    <label class="control-label"
+                           for="definition"></label>
+                    <textarea class="form-control"
+                              id="definition"
+                              name="definition"
+                              [(ngModel)]="editedDefinition[i].definition"
+                              #definition="ngModel"
+                              required></textarea>
+                    <br>
+                    <button class="btn btn-primary btn-sm"
+                            type="button"
+                            (click)="onEditSave(i)">Done</button>&nbsp;
+                  </div>
+
+                </ng-template>
               </div>
             </div>
           </dd>
