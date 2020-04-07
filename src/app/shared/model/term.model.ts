@@ -94,7 +94,7 @@ export class Definition {
 export class DefinitionRequest {
   authorName: string;
   definition: string;
-  quality: number = 0;
+
   likes?: number = 0;
 }
 
