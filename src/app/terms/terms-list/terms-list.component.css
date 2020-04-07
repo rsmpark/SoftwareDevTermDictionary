@@ -10,3 +10,9 @@ div,
 #searchTerm {
   padding-left: 1rem;
 }
+.input-mrg-right {
+  margin-right: 6px;
+}
+.btn-mrg-bottom {
+  margin-bottom: 6px;
+}
