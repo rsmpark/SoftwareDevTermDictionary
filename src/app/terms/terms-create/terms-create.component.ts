@@ -86,4 +86,5 @@ class DataForm {
   linkAuthoritative?: string;
   linkWikipedia?: string;
   linkYoutube?: string;
+  fieldOfStudy: string;
 }
