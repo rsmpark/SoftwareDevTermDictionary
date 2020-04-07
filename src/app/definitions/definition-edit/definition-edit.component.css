@@ -16,10 +16,6 @@ dt {
 
 /* Validation CSS */
 
-div,
-.custom-container {
-  margin-right: 30px;
-}
 .ng-valid[required],
 .ng-valid.required {
   border-left: 5px solid #42a948; /* green */

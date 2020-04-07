@@ -3,7 +3,7 @@
     <h3>English Term detail</h3>
     <p>&nbsp;</p>
     <div class="row">
-      <div class="col-md-10">
+      <div class="col-md-10 col-sm-10">
         <dl class="dl-horizontal">
           <dt>New Definition
           </dt>
@@ -56,6 +56,8 @@
           </dd>
           <dt>Existing Definition <br>({{term.definitions.length}})</dt>
           <dd>
+
+
             <div *ngFor="
                     let
                     definition
@@ -66,7 +68,7 @@
                  class="panel panel-default">
               <div class="panel-heading">
                 <h3 class="panel-title">
-                  <button class="btn btn-default"
+                  <button class="btn btn-default btn-sm"
                           type="button"
                           (click)="onLikeClick(i)">Like
                     <span class="badge badge-secondary">{{term.definitions[i].likes}}</span>
@@ -86,6 +88,7 @@
       </div>
 
     </div>
+
     <div>
       <hr>
       <a routerLink="/termsEnglish"
