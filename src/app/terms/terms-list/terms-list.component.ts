@@ -1,8 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { EnglishTermApi } from 'src/app/shared/model/term.model';
-import { DataManagerService } from 'src/app/shared/data-manager.service';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, concat } from 'rxjs';
+import { DataManagerService } from 'src/app/shared/data-manager.service';
+import { EnglishTermApi } from 'src/app/shared/model/term.model';
 
 @Component({
   selector: 'app-terms-list',
@@ -17,8 +16,6 @@ export class TermsListComponent implements OnInit {
   constructor(private dataManager: DataManagerService, private router: Router) {}
 
   ngOnInit(): void {
-    console.log('BBBB');
-
     this.dataManager.getAllEnglishTerms().subscribe((terms: EnglishTermApi[]) => {
       this.terms = terms;
     });

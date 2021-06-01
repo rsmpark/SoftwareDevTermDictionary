@@ -1,4 +1,19 @@
-.active {
+header {
+  margin-top: 20px;
+}
+
+.navbar-nav>li>a.active {
   background-color: darkred;
   color: white !important;
+}
+
+.navbar-brand.active {
+  background-color: darkred;
+  color: white !important;
+}
+
+@media screen and (min-width: 768px) {
+  .navbar .container {
+    padding-left: 0;
+  }
 }

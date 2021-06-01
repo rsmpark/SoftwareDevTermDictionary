@@ -1,0 +1,8 @@
+.dl-horizontal dt, .dl-horizontal dd {
+  text-align: left;
+  width: auto;
+}
+
+.dl-horizontal dd {
+  margin-left: 80px;
+}
